@@ -30,5 +30,21 @@ def test_connection():
     except Exception as e:
         print(f"An error occurred... {e}")
 
-test_connection()
+# test_connection()
 
+def test_dist():
+    try:
+        engine = create_engine(connection_string)
+        with engine.connect() as connection:
+        
+            query = "SELECT Gender, Depression FROM Homes"
+
+            df = pd.read_sql(query, connection)
+            print(df)
+            print("Success")
+
+
+    except Exception as e:
+        print(f"An error occurred... {e}")
+
+test_dist()
