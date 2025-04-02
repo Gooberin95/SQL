@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 import pandas as pd
 
+load_dotenv()
+
 server = os.getenv("DB_SERVER")
 database = os.getenv("DB_NAME")
 username = os.getenv("DB_USER")
@@ -17,8 +19,14 @@ def test_connection():
     try:
         engine = create_engine(connection_string)
         with engine.connect() as connection:
-            result = connection.execute("SELECT 1")
-            print("Success!")
+        
+            query = "SELECT * FROM Homes"
+
+            df = pd.read_sql(query, connection)
+            print(df)
+            print("Success")
+
+
     except Exception as e:
         print(f"An error occurred... {e}")
 
