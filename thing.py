@@ -62,6 +62,21 @@ def order_by_desc():
         print(f"An error occurred, {e}")
     
 
-order_by_desc()
+# order_by_desc()
 
+def order_by_asc():
+    
+    try:
+        engine = create_engine(connection_string)
+
+        with engine.connect() as connection:
+            query = 'SELECT [Work/Study Hours], [Financial Stress] FROM Homes ORDER BY [Work/Study Hours] ASC,  [Financial Stress] ASC'
+            df = pd.read_sql(query, connection)
+            print(df)
+            print("Success")
+
+    except Exception as e:
+        print(f"An error occurred, {e}")
+
+order_by_asc()
 
